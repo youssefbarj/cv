@@ -221,40 +221,90 @@ export default function MicroneedlingTreatmentGuide() {
         </div>
 
         {/* Navigation Controls - Above content for better UX */}
-        <div className="px-2 md:px-4 py-3 flex justify-center items-center bg-gradient-to-r from-blue-50 to-violet-50 border-b border-gray-100">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button
-              onClick={handlePrevious}
-              disabled={currentStep === 0}
-              variant="outline"
-              size="default"
-              className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
-            >
-              <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
-            </Button>
+        <div className="px-2 md:px-4 py-3 bg-gradient-to-r from-blue-50 to-violet-50 border-b border-gray-100">
+          {/* Top Row - Navigation Buttons */}
+          <div className="flex justify-center items-center mb-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Button
+                onClick={handlePrevious}
+                disabled={currentStep === 0}
+                variant="outline"
+                size="default"
+                className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
+              >
+                <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
+              </Button>
 
-            <span className="text-sm font-semibold font-saeada text-gray-700 px-2 hidden sm:block">
-              Étape {currentStep + 1} sur {treatmentSteps.length}
-            </span>
+              <span className="text-sm font-semibold font-saeada text-gray-700 px-2 hidden sm:block">
+                Étape {currentStep + 1} sur {treatmentSteps.length}
+              </span>
 
-            <Button
-              onClick={handleNext}
-              disabled={currentStep === treatmentSteps.length - 1}
-              variant="outline"
-              size="default"
-              className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
-            >
-              <ChevronRight size={18} className="sm:w-5 sm:h-5" />
-            </Button>
+              <Button
+                onClick={handleNext}
+                disabled={currentStep === treatmentSteps.length - 1}
+                variant="outline"
+                size="default"
+                className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
+              >
+                <ChevronRight size={18} className="sm:w-5 sm:h-5" />
+              </Button>
 
-            <Button
-              onClick={handleReset}
-              variant="outline"
-              size="default"
-              className="px-3 py-2 sm:px-4 sm:py-3 bg-white border-gray-300 hover:bg-gray-50 font-quicksand text-sm sm:text-base shadow-md"
-            >
-              <RotateCcw size={16} className="sm:w-4 sm:h-4" />
-            </Button>
+              <Button
+                onClick={handleReset}
+                variant="outline"
+                size="default"
+                className="px-3 py-2 sm:px-4 sm:py-3 bg-white border-gray-300 hover:bg-gray-50 font-quicksand text-sm sm:text-base shadow-md"
+              >
+                <RotateCcw size={16} className="sm:w-4 sm:h-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Bottom Row - Step Indicators */}
+          <div className="flex justify-center">
+            <div className="flex gap-1 md:gap-2 flex-wrap justify-center max-w-full">
+              {treatmentSteps.map((step, index) => (
+                <motion.button
+                  key={step.id}
+                  onClick={() => handleStepClick(index)}
+                  className={`relative w-6 h-6 md:w-7 md:h-7 rounded-full transition-all duration-300 flex items-center justify-center text-xs font-bold font-quicksand flex-shrink-0 ${
+                    index === currentStep
+                      ? "bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white shadow-xl scale-110"
+                      : index < currentStep
+                        ? "bg-green-400 text-white shadow-lg"
+                        : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                  }`}
+                  whileHover={{ scale: index === currentStep ? 1.1 : 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-xs">{index + 1}</span>
+
+                  {/* Checkmark for Completed Steps */}
+                  {index < currentStep && (
+                    <motion.div
+                      className="absolute -top-1 -right-1 bg-green-600 rounded-full p-0.5 z-20 shadow-lg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <CheckCircle size={6} className="w-2 h-2 text-white" />
+                    </motion.div>
+                  )}
+
+                  {/* Current Step Indicator */}
+                  {index === currentStep && (
+                    <motion.div
+                      className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 z-20 shadow-lg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <div className="w-1 h-1 bg-gradient-to-r from-[#000435] to-[#CF9FFF] rounded-full animate-pulse" />
+                    </motion.div>
+                  )}
+                </motion.button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -407,88 +457,6 @@ export default function MicroneedlingTreatmentGuide() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Controls */}
-        <div className="bg-gradient-to-r from-blue-50 to-violet-50 p-3 md:p-4 border-t border-gray-100">
-          {/* Control Buttons */}
-          <div className="flex justify-center gap-3 md:gap-4 mb-3 md:mb-4">
-            <Button
-              onClick={handlePrevious}
-              disabled={currentStep === 0}
-              variant="outline"
-              size="default"
-              className="px-4 py-2 md:px-6 md:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm md:text-base shadow-lg"
-            >
-              <ChevronLeft size={20} className="md:w-6 md:h-6" />
-            </Button>
-
-            <Button
-              onClick={handleNext}
-              disabled={currentStep === treatmentSteps.length - 1}
-              variant="outline"
-              size="default"
-              className="px-4 py-2 md:px-6 md:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm md:text-base shadow-lg"
-            >
-              <ChevronRight size={20} className="md:w-6 md:h-6" />
-            </Button>
-
-            <Button
-              onClick={handleReset}
-              variant="outline"
-              size="default"
-              className="px-4 py-2 md:px-6 md:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 font-quicksand text-sm md:text-base shadow-lg"
-            >
-              <RotateCcw size={20} className="md:w-6 md:h-6" />
-            </Button>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="flex gap-1 md:gap-2 flex-wrap justify-center max-w-full">
-              {treatmentSteps.map((step, index) => (
-                <motion.button
-                  key={step.id}
-                  onClick={() => handleStepClick(index)}
-                  className={`relative w-8 h-8 md:w-10 md:h-10 rounded-full transition-all duration-300 flex items-center justify-center text-xs md:text-sm font-bold font-quicksand flex-shrink-0 ${
-                    index === currentStep
-                      ? "bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white shadow-xl scale-110"
-                      : index < currentStep
-                        ? "bg-green-400 text-white shadow-lg"
-                        : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-                  }`}
-                  whileHover={{ scale: index === currentStep ? 1.1 : 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {/* Step Number */}
-                  <span>{index + 1}</span>
-
-                  {/* Checkmark for Completed Steps */}
-                  {index < currentStep && (
-                    <motion.div
-                      className="absolute -top-1 -right-1 bg-green-600 rounded-full p-0.5 z-20 shadow-lg"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <CheckCircle size={6} className="md:w-2 md:h-2 text-white" />
-                    </motion.div>
-                  )}
-
-                  {/* Current Step Indicator */}
-                  {index === currentStep && (
-                    <motion.div
-                      className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 z-20 shadow-lg"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <div className="w-1 h-1 md:w-1.5 md:h-1.5 bg-gradient-to-r from-[#000435] to-[#CF9FFF] rounded-full animate-pulse" />
-                    </motion.div>
-                  )}
-                </motion.button>
-              ))}
             </div>
           </div>
         </div>
