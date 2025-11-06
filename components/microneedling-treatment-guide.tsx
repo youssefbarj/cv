@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { RotateCcw, ChevronLeft, ChevronRight, Clock, CheckCircle, ChevronDown, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -114,6 +114,7 @@ export default function MicroneedlingTreatmentGuide() {
   const [currentStep, setCurrentStep] = useState(0)
   const [showMobileDetails, setShowMobileDetails] = useState(false)
   const [zoomedImage, setZoomedImage] = useState<string | null>(null)
+  const [gifKey, setGifKey] = useState(0)
   const handleReset = () => {
     setCurrentStep(0)
     setShowMobileDetails(false)
@@ -234,12 +235,15 @@ export default function MicroneedlingTreatmentGuide() {
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
                   {currentStepData.id === 9 ? (
-                    <img
-                      key="step9-gif"
-                      src="/cleaning-animation-v2.gif"
-                      alt={currentStepData.title}
+                    <video
+                      key="step9-video"
+                      src="/cleaning-animation.mp4"
                       className="w-full h-full object-contain"
-                      unoptimized={true}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls={false}
                     />
                   ) : (
                     <div
