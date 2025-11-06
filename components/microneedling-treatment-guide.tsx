@@ -233,7 +233,7 @@ export default function MicroneedlingTreatmentGuide() {
                   transition={{ duration: 0.5 }}
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
-                  {currentStepData.video ? (
+                  {currentStepData.video && currentStepData.id === 9 ? (
                     currentStepData.video.endsWith('.gif') ? (
                       <img
                         key={currentStepData.id}
