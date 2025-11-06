@@ -103,7 +103,7 @@ const treatmentSteps: TreatmentStep[] = [
     duration: "2 min",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/shema%20globale%20du%20tracage-HIJBCoQ5b2XF9EcAXQ0eRiaYkvNcaW.png",
-    video: "/cleaning-animation.mp4",
+    video: "/cleaning-animation-v2.gif",
     description:
       "Nettoyez délicatement les lignes de construction excédentaires tout en préservant les lignes principales du tracé final. Cette étape permet de clarifier le design et de préparer la zone pour le traitement de microneedling. Un nettoyage soigneux garantit un résultat net et professionnel.",
     benefits: ["Tracé clarifié", "Design épuré", "Préparation optimale"],
