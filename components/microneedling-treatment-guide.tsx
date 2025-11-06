@@ -125,6 +125,10 @@ export default function MicroneedlingTreatmentGuide() {
     setCurrentStep(stepIndex)
     setShowMobileDetails(false)
     setZoomedImage(null)
+    // Force GIF restart when clicking on step 9
+    if (stepIndex === 8) { // Step 9 (0-indexed)
+      setGifKey(prev => prev + 1)
+    }
   }
 
   const handlePrevious = () => {
@@ -137,9 +141,14 @@ export default function MicroneedlingTreatmentGuide() {
 
   const handleNext = () => {
     if (currentStep < treatmentSteps.length - 1) {
-      setCurrentStep(currentStep + 1)
+      const nextStep = currentStep + 1
+      setCurrentStep(nextStep)
       setShowMobileDetails(false)
       setZoomedImage(null)
+      // Force GIF restart when reaching step 9
+      if (nextStep === 8) { // Next step will be 9 (0-indexed)
+        setGifKey(prev => prev + 1)
+      }
     }
   }
 
@@ -235,17 +244,14 @@ export default function MicroneedlingTreatmentGuide() {
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
                   {currentStepData.id === 9 ? (
-                    <div className="relative w-full h-full">
-                      <iframe
-                        key="step9-video"
-                        src="https://player.vimeo.com/video/1134362962?autoplay=1&loop=1&muted=1&background=1"
-                        className="w-full h-full"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                      />
-                    </div>
+                    <img
+                      key={`step9-gif-${gifKey}`}
+                      src={`/cleaning-animation-v2.gif?restart=${gifKey}`}
+                      alt={currentStepData.title}
+                      className="w-full h-full object-contain"
+                      unoptimized={true}
+                      style={{ imageRendering: 'crisp-edges' }}
+                    />
                   ) : (
                     <div
                       className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
