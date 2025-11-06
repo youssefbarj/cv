@@ -233,26 +233,19 @@ export default function MicroneedlingTreatmentGuide() {
                   transition={{ duration: 0.5 }}
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
-                  {currentStepData.video && currentStepData.id === 9 ? (
-                    currentStepData.video.endsWith('.gif') ? (
-                      <img
-                        key={currentStepData.id}
-                        src={currentStepData.video}
-                        alt={currentStepData.title}
-                        className="w-full h-full object-contain"
-                        unoptimized={true}
-                      />
-                    ) : (
-                      <video
-                        src={currentStepData.video}
-                        className="w-full h-full object-contain"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        controls
-                      />
-                    )
+                  {currentStepData.id === 9 ? (
+                    <video
+                      key="step9-video"
+                      src="/cleaning-animation.mp4"
+                      className="w-full h-full object-contain"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls
+                      onError={(e) => console.error("Video error:", e)}
+                      onLoad={() => console.log("Video loaded successfully")}
+                    />
                   ) : (
                     <div
                       className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
