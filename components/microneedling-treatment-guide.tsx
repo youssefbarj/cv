@@ -220,6 +220,44 @@ export default function MicroneedlingTreatmentGuide() {
           </div>
         </div>
 
+        {/* Navigation Controls - Above content for better UX */}
+        <div className="px-2 md:px-4 py-3 flex justify-center items-center bg-gradient-to-r from-blue-50 to-violet-50 border-b border-gray-100">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Button
+              onClick={handlePrevious}
+              disabled={currentStep === 0}
+              variant="outline"
+              size="default"
+              className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
+            >
+              <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
+            </Button>
+
+            <span className="text-sm font-semibold font-saeada text-gray-700 px-2 hidden sm:block">
+              Étape {currentStep + 1} sur {treatmentSteps.length}
+            </span>
+
+            <Button
+              onClick={handleNext}
+              disabled={currentStep === treatmentSteps.length - 1}
+              variant="outline"
+              size="default"
+              className="px-3 py-2 sm:px-4 sm:py-3 bg-[#000435] bg-gradient-to-r from-[#000435] to-[#CF9FFF] text-white border-none hover:from-[#000435]/90 hover:to-[#CF9FFF]/90 disabled:opacity-50 disabled:cursor-not-allowed font-quicksand text-sm sm:text-base shadow-lg disabled:opacity-30"
+            >
+              <ChevronRight size={18} className="sm:w-5 sm:h-5" />
+            </Button>
+
+            <Button
+              onClick={handleReset}
+              variant="outline"
+              size="default"
+              className="px-3 py-2 sm:px-4 sm:py-3 bg-white border-gray-300 hover:bg-gray-50 font-quicksand text-sm sm:text-base shadow-md"
+            >
+              <RotateCcw size={16} className="sm:w-4 sm:h-4" />
+            </Button>
+          </div>
+        </div>
+
         {/* Main Content Area - Side by Side */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-2 md:p-4">
           {/* Left Side - Step Title (Hidden on mobile, visible on md and up) */}
