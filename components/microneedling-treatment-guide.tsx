@@ -234,10 +234,10 @@ export default function MicroneedlingTreatmentGuide() {
                   transition={{ duration: 0.5 }}
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
-                  {currentStepData.id === 9 ? (
+                  {currentStepData.video ? (
                     <video
-                      key="step9-video"
-                      src="/cleaning-animation.mp4"
+                      key={`step-${currentStepData.id}-video`}
+                      src={currentStepData.video}
                       className="w-full h-full object-contain"
                       autoPlay
                       loop
