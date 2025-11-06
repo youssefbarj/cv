@@ -235,19 +235,17 @@ export default function MicroneedlingTreatmentGuide() {
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
                   {currentStepData.id === 9 ? (
-                    <video
-                      key="step9-video"
-                      src="/cleaning-animation.mp4"
-                      className="w-full h-full object-contain bg-black"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      controls={true}
-                      onError={(e) => console.error("Video failed to load:", e)}
-                      onLoadStart={() => console.log("Video started loading")}
-                      onCanPlay={() => console.log("Video can play")}
-                    />
+                    <div className="relative w-full h-full">
+                      <iframe
+                        key="step9-video"
+                        src="https://player.vimeo.com/video/1134362962?autoplay=1&loop=1&muted=1&background=1"
+                        className="w-full h-full"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                      />
+                    </div>
                   ) : (
                     <div
                       className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity"
