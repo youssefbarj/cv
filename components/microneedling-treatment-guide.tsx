@@ -162,6 +162,20 @@ export default function MicroneedlingTreatmentGuide() {
 
   const currentStepData = treatmentSteps[currentStep]
 
+  // Preload Vimeo embed when approaching step 9
+  useEffect(() => {
+    if (currentStep === 7) { // One step before step 9
+      const iframe = document.createElement('iframe')
+      iframe.src = 'https://player.vimeo.com/video/1134362962?autoplay=1&loop=1&muted=1&background=1&byline=0&title=0&portrait=0&controls=0'
+      iframe.style.display = 'none'
+      document.body.appendChild(iframe)
+
+      setTimeout(() => {
+        document.body.removeChild(iframe)
+      }, 100)
+    }
+  }, [currentStep])
+
   return (
     <div className="w-full max-w-7xl mx-auto p-2 md:p-4">
       {/* Theater Mode - Unobstructed Design */}
@@ -244,13 +258,22 @@ export default function MicroneedlingTreatmentGuide() {
                   className="relative w-full h-80 sm:h-96 md:h-[36rem] bg-gradient-to-br from-blue-50 to-violet-50 rounded-2xl overflow-hidden shadow-lg"
                 >
                   {currentStepData.id === 9 ? (
-                    <img
-                      key={`step9-gif-${gifKey}`}
-                      src={`/cleaning-animation-v2.gif?restart=${gifKey}`}
-                      alt={currentStepData.title}
-                      className="w-full h-full object-contain"
-                      unoptimized={true}
-                      style={{ imageRendering: 'crisp-edges' }}
+                    <iframe
+                      key="step9-video"
+                      src="https://player.vimeo.com/video/1134362962?autoplay=1&loop=1&muted=1&background=1&byline=0&title=0&portrait=0&controls=0"
+                      className="w-full h-full"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        pointerEvents: 'none'
+                      }}
+                      loading="eager"
                     />
                   ) : (
                     <div
