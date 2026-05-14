@@ -1,18 +1,20 @@
-# Technique Visuelle — Microblading / Microblading EN / Microblading+Microshading
+# MICROBLADING — Slide 9 / MICROBLADING ET MICROSHADING — Slide 13
 
-**Course:** MICROBLADING / MICROBLADING (EN) / MICROBLADING + MICROSHADING  
-**Slide:** 9 / 10  
-**Live URL:** https://cv.edtechiecorp.com  
-**Stack:** Next.js · Tailwind CSS · TypeScript · GitHub Pages  
-
-## What this slide does
-
-An interactive visual guide presenting the core microblading technique through step-by-step diagrams and annotated illustrations. Shared across three courses (French microblading, English microblading, and the combined microblading+microshading course), this slide shows practitioners the correct hand position, stroke direction, and pigment deposit method for creating natural-looking brow hair strokes.
+**Course:** MICROBLADING — Slide 9
+**Course:** MICROBLADING ET MICROSHADING — Slide 13
+**Live URL:** https://cv.edtechiecorp.com
+**Stack:** Next.js · Tailwind CSS · TypeScript · GitHub Pages
 
 ## Screenshot
 
-![cv](./screenshot.png)
+![cv](https://github.com/youssefbarj/cv/raw/main/screenshot.png)
+
+## What this slide does
+
+This is an interactive slide embedded as an iframe inside Coassemble. See the screenshot above for a visual preview of the content.
 
 ## Usage
 
-This slide is embedded as an iframe inside Coassemble at the live URL above. DNS is managed via Cloudflare (`edtechiecorp.com`). To update the slide, push to the `main` branch — GitHub Actions will rebuild and redeploy automatically.
+This slide is served via GitHub Pages at the live URL above. DNS is managed via Cloudflare (`edtechiecorp.com`). To update the slide, push to the `main` branch — GitHub Actions will rebuild and redeploy automatically.
+
+> **For E-Lumy's tech team:** After migrating this repo to your own GitHub account, re-enable GitHub Pages in Settings → Pages → Source: GitHub Actions. Then update the embed URL in Coassemble to your new deployment URL.
